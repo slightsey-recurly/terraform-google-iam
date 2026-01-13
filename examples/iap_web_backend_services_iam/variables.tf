@@ -14,12 +14,26 @@
  * limitations under the License.
  */
 
-# variable "billing_account_id" {
-#   type        = string
-#   description = "Billing Account ID to apply IAM bindings"
-# }
-
-variable "project_id" {
+variable "group_email" {
   type        = string
-  description = "Project ID for the module"
+  description = "Email for group to receive roles (ex. group@example.com)"
 }
+
+variable "user_email" {
+  type        = string
+  description = "Email for group to receive roles (Ex. user@example.com)"
+}
+
+/******************************************
+  iap_web_backend_service variables
+ *****************************************/
+variable "project" {
+  type        = string
+  description = "Project id of the web backend service"
+}
+
+variable "iap_web_backend_service" {
+  type        = string
+  description = "Web service to bind iam to"
+}
+

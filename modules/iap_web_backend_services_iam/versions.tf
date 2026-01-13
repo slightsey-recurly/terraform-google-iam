@@ -20,12 +20,8 @@ terraform {
 
     google = {
       source  = "hashicorp/google"
-      version = ">= 3.53, < 8"
+      version = ">= 3.53, < 7"
     }
-  }
-
-  provider_meta "google" {
-    module_name = "blueprints/terraform/terraform-google-iam:pubsub_subscriptions_iam/v8.2.0"
   }
 
 }

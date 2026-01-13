@@ -1,5 +1,5 @@
 /**
- * Copyright 2023 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-terraform {
-  required_version = ">= 1.3"
-  required_providers {
+/******************************************
+  Module iap_web_backend_services_iam
+ *****************************************/
+module "iap_web_backend_services_iam" {
+  source = "../../modules/iap_web_backend_services_iam"
 
-    google = {
-      source  = "hashicorp/google"
-      version = ">= 3.53, < 8"
-    }
-  }
+  project                  = var.project
+  iap_web_backend_services = [var.iap_web_backend_service]
+  mode                     = "additive"
 
-  provider_meta "google" {
-    module_name = "blueprints/terraform/terraform-google-iam:pubsub_subscriptions_iam/v8.2.0"
+  bindings = {
+    "roles/iap.httpsResourceAccessor" = [
+      "group:${var.group_email}",
+      "user:${var.user_email}",
+    ]
   }
 
 }
